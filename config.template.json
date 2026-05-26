@@ -1,3 +1,4 @@
 {
-    "GITHUB_APP_TOKEN": "<YOUR TOKEN>"
+    "github_token": "<YOUR TOKEN, DO NOT SHARE IT!!!>",
+    "repo": "your repository for using bot"
 }
