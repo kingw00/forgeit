@@ -25,10 +25,10 @@ The config is located in the project's root folder - `.env.template`. Rename the
 2. Run the bot: `./forgeit`
 
 ## Goals
-- [] Inetegrate Hypervisor;
-- [] Intergrate JSON Parser;
-- [] Create micro-Linux distributive;
-- [] Create ForgeIt daemon;
-- [] Create GitHub Rest API module for the C++;
-- [] Overcoming OCD;
-- [] Dedicated Logger.
+- [ ] Inetegrate Hypervisor;
+- [ ] Intergrate JSON Parser;
+- [ ] Create micro-Linux distributive;
+- [ ] Create ForgeIt daemon;
+- [ ] Create GitHub Rest API module for the C++;
+- [ ] Overcoming OCD;
+- [ ] Dedicated Logger.
