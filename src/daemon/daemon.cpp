@@ -59,6 +59,23 @@ int main() {
     std::cout << "Socket binded. File: " << daemon_socket_path << "." << std::endl;
     logs << "Socket binded. File: " << daemon_socket_path.c_str() << "." << std::endl;
 
+    if(listen(socket_fd, 1) < 0) {
+        std::cerr << "Failed to listen incoming requests." << std::endl;
+        return -1;
+    }
+
+    while(1) {
+        int cl_fd = accept(socket_fd, nullptr, nullptr);
+
+        if(cl_fd < 0) {
+            continue;
+        }
+
+        
+
+        close(cl_fd);
+    }
+
     close(socket_fd);
 
     logs.close();

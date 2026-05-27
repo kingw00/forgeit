@@ -1,6 +1,16 @@
 #include <iostream>
+#include <unistd.h>
+#include <fstream>
 
 #include <config.hpp>
+
+#include <sys/socket.h>
+#include <sys/un.h>
+#include <sys/types.h>
+
+int sendtstmsg(int serv_addr) {
+    
+}
 
 int main(int argc, char** argv) {
     bool is_debug = false;
@@ -11,6 +21,8 @@ int main(int argc, char** argv) {
 
             if (arg == std::string("--debug").c_str()) {
                 is_debug = true;
+            } else if (arg == "smsg") {
+                
             } else {
                 std::cout << "Is '" << arg << "' argument is undefined." << std::endl;
             }
@@ -38,6 +50,14 @@ int main(int argc, char** argv) {
     if (is_debug) {
         std::cout << "Debbug mode active: you will get extra additional logs." << std::endl;
     }
+
+    int cl_fd = socket(AF_UNIX, SOCK_STREAM, 0);
+    if (cl_fd < 0) {
+        std::cerr << "failed to create socket." << std::endl;
+        return -1;
+    }
+
+    
 
     return 0;
 }
