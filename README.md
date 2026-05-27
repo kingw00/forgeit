@@ -16,7 +16,7 @@ A tool for easily integrating `CI/CD` bots into repositories. The bot's purpose 
 4. Build source code: `./build.sh`
 
 ## Config
-The config is located in the project's root folder - `config.template.json`. Rename the file to config.json and fill in the details.
+The config is located in the project's root folder - `.env.template`. Rename the file to `.env` and fill in the details.
 - `github_token` - Github token. You can get it by going to your account settings and navigating to the `Developer Settings` -> `Personal Access Token` -> `Fine-grained tokens`.
 - `repo` - the repository the bot will work with (format: `username/repo_name`)
 
