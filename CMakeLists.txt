@@ -13,7 +13,6 @@ add_executable(forgeit_client
 
 add_executable(forgeit_daemon
     src/daemon/daemon.cpp
-    src/daemon/socket.cpp
     src/daemon/utils.cpp
     src/config.cpp
 )

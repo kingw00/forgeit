@@ -1,5 +1,7 @@
 #include <iostream>
 
+#include <config.hpp>
+
 int main(int argc, char** argv) {
     bool is_debug = false;
 
@@ -14,8 +16,24 @@ int main(int argc, char** argv) {
             }
         }
     }
+
+    Config cfg = ConfigManager::loadConfig("../.env");
+
+    std::string daemon_socket_path = cfg.daemon_socket_path;
+    std::string repo = cfg.repo;
+
+    if(daemon_socket_path.empty() && repo.empty()) {
+        std::cerr << "Failed to load .env config." << std::endl;
+        
+        return -1;
+    }
     
-    std::cout << "You are in ForgeIt: AutoBot CLI. Here u can use:\n\tstatus: general information about bot.\nArgs:\n\t--debug: for additional text output" << std::endl;
+    std::cout << "You are in ForgeIt: AutoBot CLI. Here u can use:\n" 
+    << "\tstatus: general information about bot.\n"
+    << "Args:\n" 
+    << "\t--debug: for additional text output\n" 
+    << "\nGitHub repo: https://github.com/" << repo << ".\n"
+    << std::endl;
 
     if (is_debug) {
         std::cout << "Debbug mode active: you will get extra additional logs." << std::endl;

@@ -6,6 +6,7 @@
 struct Config {
     std::string github_token;
     std::string repo;
+    std::string daemon_socket_path;
     bool is_valid = false;
 };
 

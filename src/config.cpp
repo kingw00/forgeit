@@ -15,7 +15,7 @@ Config ConfigManager::loadConfig(const std::string& fpath) {
         std::cerr << "[Config Error]: Failed to open config." << std::endl;
         return config;
     }
-
+    
     std::string line;
     while(std::getline(file, line)) {
         line = trim(line);
@@ -32,12 +32,14 @@ Config ConfigManager::loadConfig(const std::string& fpath) {
             config.github_token = val;
         } else if (key == "repo") {
             config.repo = val;
+        } else if (key == "daemon_socket_path") {
+            config.daemon_socket_path = val;
         }
     }
 
     file.close();
 
-    if(!config.github_token.empty() && !config.repo.empty()) {
+    if(!config.github_token.empty() && !config.repo.empty() && !config.daemon_socket_path.empty()) {
         config.is_valid = true;
     } 
 
