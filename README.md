@@ -31,3 +31,4 @@ The config is located in the project's root folder - `.env.template`. Rename the
 - [] Create ForgeIt daemon;
 - [] Create GitHub Rest API module for the C++;
 - [] Overcoming OCD;
+- [] Dedicated Logger.
