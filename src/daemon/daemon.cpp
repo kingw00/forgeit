@@ -2,6 +2,7 @@
 #include <fstream>
 #include <unistd.h>
 #include <cstring>
+#include <filesystem>
 
 #include <sys/types.h>
 #include <sys/socket.h>
@@ -27,6 +28,9 @@ int main() {
 
     std::cout << "Creating temp log files. Path: `" << log_path << "`." << std::endl;
 
+    std::filesystem::remove(log_path);
+    std::cout << "Old log file has been deleted." << std::endl;
+
     std::ofstream logs;
     logs.open(log_path);
     if(!logs.is_open()) {
@@ -36,6 +40,8 @@ int main() {
 
     int socket_fd;
     sockaddr_un addr;
+
+    char buffer[4096];
 
     unlink(daemon_socket_path.c_str());
     std::memset(&addr, 0, sizeof(sockaddr_un));
@@ -71,12 +77,30 @@ int main() {
             continue;
         }
 
-        
+        std::cout << "Client connected. Client file Discriptor: " << cl_fd << "." << std::endl;
+
+        ssize_t bytes_read = read(cl_fd, buffer, sizeof(buffer) - 1);     
+        if(bytes_read == 0) {
+            std::cout << "Client " << cl_fd << " disconnected." << std::endl;
+            logs << "Client " << cl_fd << " disconnected." << std::endl;
+            close(cl_fd);
+        } else if (bytes_read > 0) {
+            buffer[bytes_read] = '\0';
+            std::string cl_msg(buffer);
+
+            std::cout << "[" << cl_fd << "]: " << cl_msg << std::endl;
+            logs << "[" << cl_fd << "]: " << cl_msg << std::endl;
+        } else {
+            std::cout << "Failed to read client n." << cl_fd << " socket." << std::endl;
+            close(cl_fd);
+        }
 
         close(cl_fd);
     }
 
+
     close(socket_fd);
+    std::filesystem::remove(daemon_socket_path);
 
     logs.close();
 
